@@ -17,7 +17,7 @@ env.hosts = [
     REMOTE_HOST_SSH,
 ]
 env.use_ssh_config = True
-env.key_filename   = 'gemoney.pem'
+env.key_filename   = '../project.pem'
 
 project_folder = '/home/{}/{}'.format(env.user,PROJECT_NAME)
 
@@ -34,7 +34,7 @@ apt_requirements = [
     'libffi-dev'
 ]
 
-def new_initSever():
+def new_initServer():
     _setup()
     update()
 
@@ -89,9 +89,7 @@ def _virtualenv_update():
     if not exists(virtualenv_folder + '/bin/pip'):
         run('cd /home/%s/.virtualenvs && virtualenv %s' % (env.user, PROJECT_NAME))
 
-    run('%s/bin/pip install -r %s/requirements.txt' % (
-        virtualenv_folder, project_folder
-    ))
+    run('%s/bin/pip install -r %s/requirements.txt' % (virtualenv_folder, project_folder))
 
 def _ufw_allow():
     sudo("ufw allow 'Apache Full'")
